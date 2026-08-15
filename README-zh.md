@@ -188,6 +188,6 @@ project/
 
 - 本仓库延续自 Zhijun Zhang 的 [MathModeling-skills](https://github.com/zhnnky329/MathModeling-skills)（MIT），原版权声明保留在 [LICENSE](LICENSE) 中。
 - `math-figure-generator` 借鉴了 [nature-skills](https://github.com/Yuan1z0825/nature-skills)（Yuan1z0825，MIT）与 [figures4papers](https://github.com/ChenLiu-1996/figures4papers) 的生产级绘图脚本。
-- EasyMathModel 以 MIT 协议发布。© 2026 Zhijun Zhang · © 2026 chentong
+- EasyMathModel 以 MIT 协议发布。 © 2026 chentong
 
 有问题或反馈？欢迎提 issue，或联系 **3480567299@qq.com**。
