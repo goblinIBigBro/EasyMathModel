@@ -90,7 +90,7 @@ Both `.claude/skills/` and `.codex/skills/` are complete standalone copies—ins
 ### Option A — inside a contest project (recommended)
 
 ```bash
-git clone https://github.com/goblinIBigBro/EasyMathModel.git .skills-tmp
+git clone https://github.com/Gob1inBr0/EasyMathModel.git .skills-tmp
 mv .skills-tmp/.claude .claude
 mv .skills-tmp/.codex .codex
 mv .skills-tmp/CLAUDE.md .
@@ -102,7 +102,7 @@ rm -rf .skills-tmp
 ### Option B — global for Claude Code
 
 ```bash
-git clone https://github.com/goblinIBigBro/EasyMathModel.git
+git clone https://github.com/Gob1inBr0/EasyMathModel.git
 cd EasyMathModel
 mkdir -p ~/.claude/skills
 for d in .claude/skills/*/; do cp -R "$d" ~/.claude/skills/; done
@@ -111,7 +111,7 @@ for d in .claude/skills/*/; do cp -R "$d" ~/.claude/skills/; done
 ### Option C — global for Codex
 
 ```bash
-git clone https://github.com/goblinIBigBro/EasyMathModel.git
+git clone https://github.com/Gob1inBr0/EasyMathModel.git
 cd EasyMathModel
 mkdir -p ~/.codex/skills
 for d in .codex/skills/*/; do cp -R "$d" ~/.codex/skills/; done

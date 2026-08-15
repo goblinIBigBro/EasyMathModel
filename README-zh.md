@@ -90,7 +90,7 @@ flowchart TD
 ### 方案 A — 放进比赛项目（推荐）
 
 ```bash
-git clone https://github.com/goblinIBigBro/EasyMathModel.git .skills-tmp
+git clone https://github.com/Gob1inBr0/EasyMathModel.git .skills-tmp
 mv .skills-tmp/.claude .claude
 mv .skills-tmp/.codex .codex
 mv .skills-tmp/CLAUDE.md .
@@ -102,7 +102,7 @@ rm -rf .skills-tmp
 ### 方案 B — 全局安装到 Claude Code
 
 ```bash
-git clone https://github.com/goblinIBigBro/EasyMathModel.git
+git clone https://github.com/Gob1inBr0/EasyMathModel.git
 cd EasyMathModel
 mkdir -p ~/.claude/skills
 for d in .claude/skills/*/; do cp -R "$d" ~/.claude/skills/; done
@@ -111,7 +111,7 @@ for d in .claude/skills/*/; do cp -R "$d" ~/.claude/skills/; done
 ### 方案 C — 全局安装到 Codex
 
 ```bash
-git clone https://github.com/goblinIBigBro/EasyMathModel.git
+git clone https://github.com/Gob1inBr0/EasyMathModel.git
 cd EasyMathModel
 mkdir -p ~/.codex/skills
 for d in .codex/skills/*/; do cp -R "$d" ~/.codex/skills/; done
