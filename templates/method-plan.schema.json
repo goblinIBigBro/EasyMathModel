@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Method Card",
+  "description": "Compact role-based shortlist contract. The filename is retained for compatibility.",
+  "type": "object",
+  "$defs": {
+    "string_array": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "method": {
+      "type": "object",
+      "properties": {
+        "method_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "enum": [
+            "main_candidate",
+            "usable_baseline",
+            "conditional_fallback",
+            "diagnostic_reference"
+          ]
+        },
+        "required_output": {
+          "$ref": "#/$defs/string_array"
+        },
+        "required_data": {
+          "$ref": "#/$defs/string_array"
+        },
+        "assumptions": {
+          "$ref": "#/$defs/string_array"
+        },
+        "known_risks": {
+          "$ref": "#/$defs/string_array"
+        },
+        "fallback_trigger": {
+          "type": "string"
+        },
+        "implementation_cost": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "interpretability": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      },
+      "required": [
+        "method_id",
+        "name",
+        "role",
+        "required_output",
+        "required_data",
+        "assumptions",
+        "known_risks",
+        "implementation_cost",
+        "interpretability"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "question_id": {
+      "type": "string",
+      "pattern": "^Q[^/]*$"
+    },
+    "task_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_output": {
+      "$ref": "#/$defs/string_array"
+    },
+    "human_constraints": {
+      "$ref": "#/$defs/string_array"
+    },
+    "methods": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "items": {
+        "$ref": "#/$defs/method"
+      }
+    },
+    "baseline_validity": {
+      "type": "object",
+      "properties": {
+        "same_output_type": {
+          "type": "boolean"
+        },
+        "runnable_on_available_data": {
+          "type": "boolean"
+        },
+        "meaningfully_comparable": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "same_output_type",
+        "runnable_on_available_data",
+        "meaningfully_comparable"
+      ],
+      "additionalProperties": false
+    },
+    "implementation": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "enum": [
+            "python",
+            "matlab"
+          ]
+        },
+        "runtime_notes": {
+          "$ref": "#/$defs/string_array"
+        },
+        "random_seed_required": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "target",
+        "runtime_notes",
+        "random_seed_required"
+      ],
+      "additionalProperties": false
+    },
+    "risk_probe_ref": {
+      "type": "string",
+      "pattern": "^methods/[^/]+/probes/risk_probe_summary\\.json$"
+    },
+    "decision_ledger_ref": {
+      "type": "string",
+      "pattern": "^methods/[^/]+/qx_decisions\\.jsonl$"
+    },
+    "status": {
+      "enum": [
+        "PROPOSED",
+        "SCREENED",
+        "HUMAN_DECIDED"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "question_id",
+    "task_type",
+    "required_output",
+    "human_constraints",
+    "methods",
+    "baseline_validity",
+    "implementation",
+    "risk_probe_ref",
+    "decision_ledger_ref",
+    "status"
+  ],
+  "allOf": [
+    {
+      "properties": {
+        "methods": {
+          "contains": {
+            "properties": {
+              "role": {
+                "const": "main_candidate"
+              }
+            },
+            "required": [
+              "role"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "methods": {
+          "contains": {
+            "properties": {
+              "role": {
+                "const": "usable_baseline"
+              }
+            },
+            "required": [
+              "role"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "methods": {
+          "contains": {
+            "properties": {
+              "role": {
+                "const": "conditional_fallback"
+              }
+            },
+            "required": [
+              "role"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

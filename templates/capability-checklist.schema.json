@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Capability Checklist",
+  "description": "Question-type-agnostic acceptance contract. Each capability converts a problem requirement into a checkable acceptance item.",
+  "type": "object",
+  "$defs": {
+    "capability": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^Q[^/]+-C[0-9]+$"
+        },
+        "subquestion": {
+          "type": "string",
+          "pattern": "^Q[^/]*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "judge": {
+          "enum": [
+            "machine",
+            "semantic"
+          ]
+        },
+        "criterion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_output": {
+          "type": "string",
+          "minLength": 1
+        },
+        "machine_check": {
+          "enum": [
+            "delivery",
+            "ingest",
+            "constraint",
+            "facts",
+            "leakage"
+          ]
+        },
+        "falsifiable_check": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_sentence": {
+          "type": "string",
+          "pattern": "^S[0-9]+$"
+        }
+      },
+      "required": [
+        "id",
+        "subquestion",
+        "name",
+        "judge",
+        "criterion",
+        "source_sentence"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "problem_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "n_subproblems": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/capability"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "problem_id",
+    "n_subproblems",
+    "capabilities"
+  ],
+  "allOf": [
+    {
+      "properties": {
+        "capabilities": {
+          "contains": {
+            "properties": {
+              "subquestion": {
+                "const": "Q1"
+              }
+            },
+            "required": [
+              "subquestion"
+            ]
+          },
+          "minContains": 1
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}
