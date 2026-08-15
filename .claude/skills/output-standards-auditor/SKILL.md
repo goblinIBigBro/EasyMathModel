@@ -20,6 +20,10 @@ Catch output-level defects mechanically before the three-auditor layer: planned 
 3. Save `paper/audits/output_spec_report.md`.
 4. Set verdict: `PASSED`, `FAILED`, or `NOT_RUN`.
 
+The `figure_vision_review` check runs first when Type 3/4 figures exist:
+read `paper/audits/vision_figure_review.md` and the waiver ledger before
+reconciling figure products.
+
 # Named Checks
 
 ## artifact_contract
@@ -32,6 +36,17 @@ Catch output-level defects mechanically before the three-auditor layer: planned 
 - Every planned figure in the figure plan/manifest exists on disk and is embedded in the paper.
 - No figure name is embedded that does not exist.
 - Every figure entry names a concrete chart type, its evidence source, and its target section.
+
+## figure_vision_review
+
+- Every embedded Type 3/4 figure has a verdict in
+  `paper/audits/vision_figure_review.md`.
+- A `NEEDS_FIX` verdict blocks this audit; the figure must be rerendered and
+  re-reviewed.
+- A `NOT_RUN` verdict is allowed only when
+  `planning/framing_decisions.jsonl` contains a human
+  `decision_type: figure_vision_review_waiver` entry with non-empty rationale.
+- The report contains no API key or request payload.
 
 ## page_estimate
 
@@ -80,5 +95,6 @@ Catch output-level defects mechanically before the three-auditor layer: planned 
 
 - Every named check has evidence or a justified `NOT_APPLICABLE`.
 - Figure plan and paper agree in both directions.
+- Every Type 3/4 figure verdict is `PASSED`, or `NOT_RUN` with a valid waiver.
 - Numbers trace to frozen or current result artifacts.
 - Verdict matches the findings and the QA layer consumes the report.

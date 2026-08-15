@@ -33,6 +33,9 @@ description: Perform the final submission-level audit of mathematical-modeling w
 
 5. **Presentation**
    - Required figures/tables exist and passed render checks.
+   - Type 3/4 vision-review verdicts match `paper/audits/vision_figure_review.md`;
+     `NOT_RUN` verdicts are covered by a human waiver in
+     `planning/framing_decisions.jsonl`.
    - Figure types are used correctly.
    - References are real, complete, and consistently cited.
    - AI-use disclosure follows the current contest profile and verified rules.
@@ -59,6 +62,7 @@ description: Perform the final submission-level audit of mathematical-modeling w
 # Verification
 
 - All five audit dimensions were evaluated.
+- Vision-review verdicts and waivers were sampled from the audit trail.
 - Blocking findings are explicit and actionable.
 - QA verdict agrees with consistency/completeness verdicts and sampled evidence.
 - Final assembly is recommended only when all three audits pass.

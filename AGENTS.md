@@ -23,6 +23,24 @@
 - Use `lean` while exploring and iterating. Switch to `submission` only when preparing writer handoff or final assembly.
 - For compatibility, read legacy `{ "mode": "learning" | "speed" }` as `interaction_mode`.
 
+`planning/vision_config.json` records vision capability and the external
+vision-model API state:
+
+- `current_model_has_vision`: whether the executing agent can actually view
+  rendered images in this session (`true`/`false`/`null` while unknown).
+- `external_api`: provider, endpoint, model list, `key_env`, and status
+  (`unconfigured`/`skipped`/`pending_probe`/`validated`/`failed`). The API key
+  is read from the named environment variable (default `VISION_API_KEY`) and
+  is never stored in files, reports, or git.
+- `policy`: which figure types require vision review (Type 3/4 by default).
+- At session start, `workflow-orchestrator` confirms vision capability; when
+  the current model has no vision and no API is configured, it asks the user
+  once. Skipping records `external_api.status = "skipped"` and never blocks
+  the modeling workflow.
+- Type 3/4 figures must be `PASSED` by `figure-vision-review`, or `NOT_RUN`
+  covered by a human waiver (`decision_type: figure_vision_review_waiver` in
+  `planning/framing_decisions.jsonl`), before G5 passes.
+
 # Repository Skill Copies
 
 - `.codex/skills/` and `.claude/skills/` are two complete, independently usable skill trees.
@@ -125,6 +143,9 @@ An optional third card may be used before final freeze for claim scope and confi
 - Numerical claims come from `frozen_numbers.json`.
 - Physical/domain interpretation and contribution claims are human-confirmed.
 - Every paper figure passes render verification.
+- Every Type 3/4 figure has a `figure-vision-review` verdict: `PASSED`, or
+  `NOT_RUN` covered by a human waiver (`decision_type:
+  figure_vision_review_waiver` in `planning/framing_decisions.jsonl`).
 
 ## G6 — FINAL_AUDIT_PASSED
 
@@ -181,6 +202,7 @@ During exploration, keep only:
 
 ```text
 planning/session_config.json
+planning/vision_config.json            # session state; no API key
 planning/framing_decisions.jsonl       # only when global framing decisions exist
 planning/manifests/Qx.json
 methods/Qx/qx_method_card.md
@@ -206,6 +228,7 @@ results/Qx/reports/qx_final_result_analysis.md
 robustness/Qx/qx_robustness_report.md
 results/Qx/reports/qx_solution_package_for_writer.md
 results/Qx/reports/frozen_numbers.json
+paper/audits/vision_figure_review.md   # when Type 3/4 figures exist
 ```
 
 The three critical writer rules remain:
@@ -266,13 +289,17 @@ Create `logs/` only when a failure, warning, or reproducibility need justifies i
 - Type 2 comparison: may appear in paper.
 - Type 3 paper: must support a main claim and pass publication-quality render checks.
 - Type 4 appendix: supplementary and referenced from the main text.
+- Type 3/4 figures are vision-reviewed by `figure-vision-review`; a
+  `NEEDS_FIX` verdict blocks G5 until the figure is rerendered and re-reviewed;
+  `NOT_RUN` requires a human waiver before final assembly.
 - Paper claims must remain proportional to tested evidence.
 - Mention eliminated methods only when the record helps explain a real trade-off; do not manufacture breadth.
 
 # Verification
 
 - In `lean`, verify the current gate and only the affected artifacts.
-- In `submission`, verify all required artifacts, frozen-number lineage, figure rendering, references, and the three independent audits.
+- In `submission`, verify all required artifacts, frozen-number lineage, figure
+  rendering and vision review, references, and the three independent audits.
 - A review or audit passes by completing its named semantic checks, not by reaching an arbitrary bullet count.
 - Flag uncertainty and blocking issues explicitly.
 - Do not approve final assembly while any G6 auditor fails.

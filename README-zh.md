@@ -2,12 +2,12 @@
 
 <img src="docs/assets/easymathmodel-logo.svg" alt="EasyMathModel" width="640"/>
 
-**30 个 skill · 6 道 gate · 3 重终审 —— 给数学建模竞赛装上的护栏系统。**
+**31 个 skill · 6 道 gate · 3 重终审 —— 给数学建模竞赛装上的护栏系统。**
 
 <a href="./README.md">English</a> · <a href="./README-zh.md"><b>简体中文</b></a>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-2E9E44.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-30-1A6FC4.svg)](#30-个-skill-一览)
+[![Skills](https://img.shields.io/badge/skills-31-1A6FC4.svg)](#31-个-skill-一览)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-E28E2C.svg)](CLAUDE.md)
 [![Codex](https://img.shields.io/badge/Codex-supported-E28E2C.svg)](AGENTS.md)
 [![Docs](https://img.shields.io/badge/docs-output%20spec-7A5AF8.svg)](docs/competition-output-spec-zh.md)
@@ -18,7 +18,7 @@
 
 ## 这是什么
 
-EasyMathModel 是 **30 个 agent 技能** 的集合，给数学建模竞赛套上一套可检查的护栏。它不是又一个模型库，也不是一键写论文的工具，而是一条工作流：解析、分类、筛选、实现、验证、冻结、写作、审计——每一步都必须有证据落盘，才允许进入下一步。
+EasyMathModel 是 **31 个 agent 技能** 的集合，给数学建模竞赛套上一套可检查的护栏。它不是又一个模型库，也不是一键写论文的工具，而是一条工作流：解析、分类、筛选、实现、验证、冻结、写作、审计——每一步都必须有证据落盘，才允许进入下一步。
 
 分工很简单：
 
@@ -62,7 +62,7 @@ flowchart TD
     H["命名检查代码评审<br/>G3"]
     I["实验 → 结果 → 稳健性"]
     J["👤 你判定：继续 / 调整 / 备用<br/>G4: 结果已判定"]
-    K["图表规划 → 渲染校验出图"]
+    K["图表规划 → 渲染 + 视觉模型审查"]
     L["材料包 + 冻结数字<br/>G4: 结果已冻结"]
     M["只依据材料包写论文<br/>G5"]
     N["润色 → 参考文献 → 输出规范预检"]
@@ -73,14 +73,14 @@ flowchart TD
 
 两条承重边界最关键：**G2** 在完整实现前拦住假设和可行性问题；**G4** 杜绝旧数字进入论文。
 
-## 30 个 skill 一览
+## 31 个 skill 一览
 
 | 阶段 | 技能 | 作用 |
 |---|---|---|
 | **前期** | `workflow-orchestrator` · `problem-parser` · `problem-classifier` · `capability-contract-builder` · `related-paper-analyzer` · `symbol-table-builder` · `model-assumptions-builder` · `data-auditor-cleaner` | 老实界定问题、盘点数据，把每个要求钉成可验收的能力项 |
 | **方法** | `method-selector` · `decision-prompt-builder` · `modeler-decision-logger` | 筛选短名单、把真实取舍摆到你面前、记录你的决定 |
 | **实现** | `model-code-analyzer` · `python-model-code-generator` · `matlab-model-code-generator` · `code-reviewer` · `python-code-reviewer` · `matlab-code-reviewer` | 把获批方法变成最小、可评审、可复现的代码 |
-| **证据** | `result-report-generator` · `robustness-checker` · `final-method-explainer` · `figure-table-planner` · `math-figure-generator` · `solution-package-builder` | 构建紧凑证据、测试最可能翻车的地方、冻结获批数字 |
+| **证据** | `result-report-generator` · `robustness-checker` · `final-method-explainer` · `figure-table-planner` · `math-figure-generator` · `figure-vision-review` · `solution-package-builder` | 构建紧凑证据、测试最可能翻车的地方、用视觉模型审查论文图、冻结获批数字 |
 | **写作与终审** | `paper-section-writer` · `paper-polisher` · `reference-manager` · `output-standards-auditor` · `consistency-auditor` · `completeness-auditor` · `quality-assurance-auditor` | 只依据材料包写作、诚实润色、通过三个独立终审 |
 
 `.claude/skills/` 与 `.codex/skills/` 都是完整可独立使用的副本——装一套或两套都行。
@@ -143,7 +143,7 @@ project/
 │   ├── parse/  classification/  manifests/Qx.json
 │   ├── capability_checklist.json
 │   ├── symbol_table.md  model_assumptions.md
-│   └── session_config.json
+│   ├── session_config.json  vision_config.json
 ├── methods/Qx/
 │   ├── qx_method_card.md  qx_decisions.jsonl
 │   └── probes/risk_probe_summary.json

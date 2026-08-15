@@ -33,7 +33,7 @@ Make every visual evidence-bearing. Prefer fewer useful visuals over a decorativ
    - one core claim;
    - chart/table form;
    - target section;
-   - status and render needs.
+   - status and render needs (Type 3/4 require `figure-vision-review`).
 4. Ask the human to confirm judgment-bearing Type 3 claims through one compact choice card when they are not already in the decision ledger.
 5. Save `methods/Qx/qx_figure_table_plan.md` only when durable planning is needed. In lean exploration, a compact in-conversation plan is sufficient.
 
@@ -67,6 +67,8 @@ Rules for every manifest entry:
 - TikZ is reserved for true geometric structure drawn by coordinates (feasible region, phase plane, force diagram, network topology). Function curves, trends, and distributions are data figures, never TikZ.
 - Multi-panel combinations are explicit (`[2-panel]`/`[4-panel]`); panels stay below 4 and each panel keeps enough width to read.
 - Perception/reconstruction tasks plan a real-sample before/after comparison figure ahead of metric figures.
+- Type 3/4 entries must be reviewed by `figure-vision-review` after rendering;
+  record this in the plan so generation and audits can verify it.
 
 # Rules
 
@@ -85,3 +87,4 @@ Rules for every manifest entry:
 - Type 3 claims trace to human decisions and frozen evidence.
 - No unnecessary or decorative visual remains.
 - Manifest entries and downstream generated figures reconcile one-to-one.
+- Every Type 3/4 plan entry marks its vision-review requirement.

@@ -162,6 +162,18 @@ Manifest rules:
 - perception/reconstruction tasks plan a real-sample before/after comparison figure ahead of metric figures;
 - reference density: 12–20 data figures is a typical competition range, with 3 as a hard floor; plan by problem complexity, not by quota.
 
+Type 3/4 figures additionally pass `figure-vision-review` before G5:
+
+- verdicts are `PASSED`, `NEEDS_FIX`, or `NOT_RUN`, recorded in
+  `paper/audits/vision_figure_review.md`;
+- `NEEDS_FIX` blocks the figure until it is rerendered and re-reviewed;
+- `NOT_RUN` is allowed only with a human waiver
+  (`decision_type: figure_vision_review_waiver`) in
+  `planning/framing_decisions.jsonl`;
+- the external vision API key never appears in files or reports; it is read
+  from the environment variable named in `planning/vision_config.json`
+  (`key_env`, default `VISION_API_KEY`).
+
 ## 7. Paper Output Norms
 
 ### Structure
@@ -208,6 +220,7 @@ No `TODO`, `待补充`, `[论文标题]`, or template sentinels remain in sectio
 |---|---|
 | `artifact_contract` | canonical files exist at minimum sizes; naming contract holds; no stale result versions |
 | `figure_manifest` | every planned figure exists and is embedded; no embedded figure is missing from disk; every entry has type, source, section |
+| `figure_vision_review` | every embedded Type 3/4 figure has a verdict; `NEEDS_FIX` blocks; `NOT_RUN` requires a human waiver; report contains no API key |
 | `page_estimate` | one density; body sections only; no code in body; no thin subquestion chapters |
 | `abstract_format` | abstract written last; per-question paragraphs; numbers match body |
 | `number_traceability` | numbers trace to frozen/current artifacts; audit credentials present; no unrealistic values without justification |
@@ -227,6 +240,7 @@ The report is a pre-flight: it feeds the three G6 auditors (consistency, complet
 | `capability_contract` review check | `python-code-reviewer`, `matlab-code-reviewer` |
 | Constraint closure audit | `robustness-checker` |
 | Figure manifest | `figure-table-planner`, `math-figure-generator` |
+| Figure vision review | `figure-vision-review`, `workflow-orchestrator` |
 | Output pre-flight audit | `output-standards-auditor` |
 | Routing | `workflow-orchestrator` |
 

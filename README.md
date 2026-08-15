@@ -2,12 +2,12 @@
 
 <img src="docs/assets/easymathmodel-logo.svg" alt="EasyMathModel" width="640"/>
 
-**30 skills · 6 gates · 3 final audits — a guardrail kit for mathematical modeling contests.**
+**31 skills · 6 gates · 3 final audits — a guardrail kit for mathematical modeling contests.**
 
 <a href="./README.md"><b>English</b></a> · <a href="./README-zh.md">简体中文</a>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-2E9E44.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-30-1A6FC4.svg)](#the-30-skills-at-a-glance)
+[![Skills](https://img.shields.io/badge/skills-31-1A6FC4.svg)](#the-31-skills-at-a-glance)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-E28E2C.svg)](CLAUDE.md)
 [![Codex](https://img.shields.io/badge/Codex-supported-E28E2C.svg)](AGENTS.md)
 [![Docs](https://img.shields.io/badge/docs-output%20spec-7A5AF8.svg)](docs/competition-output-spec.md)
@@ -18,7 +18,7 @@
 
 ## What is this?
 
-EasyMathModel is a collection of **30 agent skills** that wrap a math-modeling contest in checkable guardrails. It is not another model zoo and not a paper factory. It is a workflow: every step—parse, classify, screen, implement, verify, freeze, write, audit—can only move forward when its evidence exists on disk.
+EasyMathModel is a collection of **31 agent skills** that wrap a math-modeling contest in checkable guardrails. It is not another model zoo and not a paper factory. It is a workflow: every step—parse, classify, screen, implement, verify, freeze, write, audit—can only move forward when its evidence exists on disk.
 
 The division of labor is simple:
 
@@ -62,7 +62,7 @@ flowchart TD
     H["Named-check code review<br/>G3"]
     I["Experiments → results → robustness"]
     J["👤 You judge: proceed / adjust / fallback<br/>G4: results judged"]
-    K["Figure planning → render-verified figures"]
+    K["Figure planning → render + vision review"]
     L["Solution package + frozen numbers<br/>G4: results frozen"]
     M["Paper sections from the package only<br/>G5"]
     N["Polish → references → output-spec pre-flight"]
@@ -73,14 +73,14 @@ flowchart TD
 
 Two boundaries carry the most weight: **G2** catches assumption and feasibility failures before full implementation, and **G4** stops stale numbers from ever reaching the paper.
 
-## The 30 skills at a glance
+## The 31 skills at a glance
 
 | Phase | Skills | What they do for you |
 |---|---|---|
 | **Preparation** | `workflow-orchestrator` · `problem-parser` · `problem-classifier` · `capability-contract-builder` · `related-paper-analyzer` · `symbol-table-builder` · `model-assumptions-builder` · `data-auditor-cleaner` | Frame the problem honestly, inventory the data, and pin every requirement to a checkable capability |
 | **Method** | `method-selector` · `decision-prompt-builder` · `modeler-decision-logger` | Screen a shortlist, put real trade-offs in front of you, and record your choice |
 | **Implementation** | `model-code-analyzer` · `python-model-code-generator` · `matlab-model-code-generator` · `code-reviewer` · `python-code-reviewer` · `matlab-code-reviewer` | Turn the approved method into minimal, reviewable, reproducible code |
-| **Evidence** | `result-report-generator` · `robustness-checker` · `final-method-explainer` · `figure-table-planner` · `math-figure-generator` · `solution-package-builder` | Build compact evidence, test what is most likely to break, and freeze approved numbers |
+| **Evidence** | `result-report-generator` · `robustness-checker` · `final-method-explainer` · `figure-table-planner` · `math-figure-generator` · `figure-vision-review` · `solution-package-builder` | Build compact evidence, test what is most likely to break, vision-review paper figures, and freeze approved numbers |
 | **Writing & audit** | `paper-section-writer` · `paper-polisher` · `reference-manager` · `output-standards-auditor` · `consistency-auditor` · `completeness-auditor` · `quality-assurance-auditor` | Draft from the package, polish honestly, and pass three independent final audits |
 
 Both `.claude/skills/` and `.codex/skills/` are complete standalone copies—install either one, or both.
@@ -143,7 +143,7 @@ project/
 │   ├── parse/  classification/  manifests/Qx.json
 │   ├── capability_checklist.json
 │   ├── symbol_table.md  model_assumptions.md
-│   └── session_config.json
+│   ├── session_config.json  vision_config.json
 ├── methods/Qx/
 │   ├── qx_method_card.md  qx_decisions.jsonl
 │   └── probes/risk_probe_summary.json

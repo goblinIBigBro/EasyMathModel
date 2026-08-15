@@ -27,7 +27,12 @@ Load only what the requested chart needs:
 5. Apply the shared color, typography, sizing, and labeling conventions.
 6. Render the final output and inspect it visually.
 7. Check clipping, overlap, illegible text, misleading axes, legends, empty panels, and source/claim mismatch.
-8. Iterate until render checks pass.
+8. For Type 3/4 figures, run `figure-vision-review` checklist mode (open review
+   too when enabled); fix and rerender until the checklist has zero `FAIL`.
+9. When the external vision API is skipped or unavailable, record the figure
+   as `NOT_RUN` with the reason and continue; final submission needs a human
+   waiver.
+10. Iterate until render checks and the applicable vision review pass.
 
 # Output Locations
 
@@ -44,6 +49,8 @@ Use stable descriptive filenames. Do not copy Type 1 diagnostics into the paper 
 - Uncertainty is shown when it is part of the claim.
 - Type 3 raster output is at least 300 dpi; vector output is preferred when compatible.
 - Accessibility and grayscale differentiation are considered.
+- Type 3/4 figures carry a vision-review verdict (`PASSED`/`NEEDS_FIX`/
+  `NOT_RUN`) recorded in `paper/audits/vision_figure_review.md`.
 
 # Rules
 
@@ -58,6 +65,7 @@ Use stable descriptive filenames. Do not copy Type 1 diagnostics into the paper 
 
 - Source, claim, type, and target section agree.
 - Render inspection passed.
+- Type 3/4 vision review verdict is `PASSED`, or `NOT_RUN` with a waiver.
 - Text is readable at final paper size.
 - Legends, colors, markers, axes, units, and captions are consistent.
 - Final output path exists and is recorded in the figure plan.

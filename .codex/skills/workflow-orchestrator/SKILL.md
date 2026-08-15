@@ -17,6 +17,16 @@ Before orchestration in a new workspace:
 - check the chosen runtime and required core packages;
 - verify the workspace skeleton needed for the current request;
 - read `planning/session_config.json`, accepting legacy `mode`.
+- read `planning/vision_config.json`; create it from
+  `templates/vision-config.example.json` when absent, and report the vision
+  status: native vision (`current_model_has_vision`) and external API status
+  (`unconfigured`/`skipped`/`validated`/`failed`).
+
+When native vision is unknown (`null`) and the external API is not validated,
+ask the user once: native vision available, provide an external vision API, or
+skip. Skipping sets `external_api.status = "skipped"`; it never blocks the
+modeling workflow, but Type 3/4 figures then require a human waiver before
+final assembly.
 
 Report warnings concisely. Do not create the full project skeleton unless the user is initializing a project.
 
@@ -114,7 +124,11 @@ In `submission`, additionally require:
 
 ## G5 — PAPER_SECTION_READY
 
-Require the three writer rules, frozen-number sourcing, human-confirmed interpretation/claim scope, and verified figures.
+Require the three writer rules, frozen-number sourcing, human-confirmed
+interpretation/claim scope, verified figures, and for every Type 3/4 figure a
+`figure-vision-review` verdict: `PASSED`, or `NOT_RUN` covered by a human
+waiver (`decision_type: figure_vision_review_waiver` in
+`planning/framing_decisions.jsonl`).
 
 ## G6 — FINAL_AUDIT_PASSED
 
@@ -135,6 +149,7 @@ Choose one primary next action:
 - final results without robustness → `robustness-checker`;
 - submission package incomplete → final explainer, result report, or package builder;
 - submission paper drafted but not output-audited → `output-standards-auditor` before the G6 layer;
+- Type 3/4 figures rendered but not vision-reviewed → `figure-vision-review`;
 - paper ready but unaudited → the earliest missing final auditor.
 
 Do not invoke several judgment-bearing skills speculatively.
@@ -193,6 +208,7 @@ Mark them `legacy_source` in the manifest and recommend migration at the next ma
 Return a compact state report:
 
 - profile;
+- vision state (native vision + external API status, when material);
 - per-question current gate and blocker;
 - artifacts changed or missing;
 - change-impact class;

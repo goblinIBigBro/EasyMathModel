@@ -22,6 +22,10 @@
 - Never edit `frozen_numbers.json` manually.
 - Use `planning/capability_checklist.json` when the problem is parameter-dense or has multiple verifiable capabilities; treat its `falsifiable_check` items as the acceptance contract through modeling, code review, and paper writing.
 - Run `output-standards-auditor` in `submission` before the three G6 auditors; `paper/audits/output_spec_report.md` is a pre-flight check, not a replacement for any of them.
+- Use `planning/vision_config.json` to record vision capability and the
+  external vision API state (key only via `key_env` environment variable).
+  Type 3/4 figures must pass `figure-vision-review` (`PASSED`) or carry a
+  human waiver for `NOT_RUN` before final assembly.
 - Precheck load-bearing assumptions and adopt problem-implied upgrade mechanisms by default; recompute hard constraints from final results, audit baselines too, and record the `AUDIT_OK` credential.
 
 # Compatibility

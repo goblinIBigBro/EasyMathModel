@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "current_model_has_vision": null,
+  "external_api": {
+    "enabled": false,
+    "provider": "bigmodel",
+    "endpoint": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+    "models": [
+      "glm-4.1v-thinking-flash",
+      "glm-4.5v",
+      "glm-4v-plus"
+    ],
+    "key_env": "VISION_API_KEY",
+    "status": "unconfigured",
+    "validated_at": null,
+    "last_error": null
+  },
+  "policy": {
+    "review_type3_4": true,
+    "review_type1_2": false,
+    "checklist_required": true,
+    "open_review": true,
+    "max_image_edge": 1280
+  },
+  "updated_at": null
+}
