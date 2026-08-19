@@ -81,6 +81,10 @@ reconciling figure products.
 ## format_compliance
 
 - Contest-specific format: anonymity, TOC, Chinese and English abstracts where required, symbol table in `longtable`, no `babel[english]` in Chinese templates, no code blocks in body.
+- Paper is authored in LaTeX by default (`paper/main.tex` +
+  `paper/sections/*.tex` + `paper/refs.bib`); `.docx`/Word is not a default
+  deliverable and appears only when the contest profile explicitly requires
+  it. Markdown is an intermediate format only.
 - Time-varying contest rules are verified against the current official source; do not assume last year's rules.
 
 # Rules

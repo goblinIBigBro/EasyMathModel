@@ -176,6 +176,15 @@ Type 3/4 figures additionally pass `figure-vision-review` before G5:
 
 ## 7. Paper Output Norms
 
+### Output format
+
+- Default paper output is LaTeX: `paper/main.tex` + `paper/sections/*.tex` +
+  `paper/refs.bib`, compiled to PDF.
+- Markdown is an intermediate drafting format only; sections are converted to
+  `.tex` before writer handoff.
+- Word/`.docx` is not a default deliverable; produce it only when the contest
+  profile explicitly requires it.
+
 ### Structure
 
 Competition papers keep the standard skeleton (abstract → restatement → assumptions → symbols → per-question modeling and solving → sensitivity/validation → evaluation → references → appendix code). Statistics-modeling papers design content-driven chapters, but chapter titles must be specific and core analysis chapters occupy roughly 40–50% of the paper.

@@ -43,7 +43,9 @@ Do not hunt through raw experiment folders to invent a narrative.
    - limitation and applicable scope.
 5. Mention the baseline and eliminated alternatives only when they explain a real decision.
 6. Use only Type 2–4 figures as appropriate; never place Type 1 diagnostics in the paper.
-7. Save `paper/sections/qx.tex` or the requested Markdown section.
+7. Save the section as `paper/sections/qx.tex` by default (LaTeX is the
+   canonical paper format). Request Markdown only when the user explicitly
+   asks; never default to Word/`.docx`.
 
 # Human-Owned Content
 
@@ -64,6 +66,9 @@ Transcribe these from the decision ledger with provenance. If absent, invoke a c
 - Avoid procedural diary prose and ceremonial detail.
 - Keep formulas, symbols, units, captions, and filenames consistent.
 - Do not create a new decision artifact.
+- Default paper output is LaTeX (`.tex` sections compiled by `main.tex`);
+  `.docx`/Word is produced only when the contest profile explicitly requires
+  it.
 
 # Verification
 

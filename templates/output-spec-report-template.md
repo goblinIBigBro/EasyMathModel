@@ -91,6 +91,7 @@ Evidence:
 - [ ] anonymity, TOC, required abstracts
 - [ ] symbol table uses `longtable`
 - [ ] no `babel[english]` in Chinese templates
+- [ ] paper authored in LaTeX by default; no `.docx` unless the contest requires it
 - [ ] contest rules verified against the current official source
 
 ## Findings

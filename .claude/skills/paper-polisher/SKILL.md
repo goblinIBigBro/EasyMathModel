@@ -40,7 +40,9 @@ If paper sections do not exist, hand back to `paper-section-writer`.
 
 Use or request:
 
-- `paper/sections/*.md` or `paper/sections/*.tex` — the drafted sections.
+- `paper/sections/*.tex` — the drafted sections (default, canonical format).
+- `paper/sections/*.md` — accepted only as an intermediate draft; convert it
+  to `.tex` before handoff.
 - `methods/Qx/qx_final_method_explanation.md` — for formula and notation verification.
 - `results/Qx/reports/qx_final_result_analysis.md` — for claim verification.
 - `planning/symbol_table.md` — for notation consistency.
@@ -70,7 +72,8 @@ Use or request:
    - Method names must match the final method explanation.
    - "Baseline", "main model", "improved model" must be used consistently.
 
-6. Produce polished sections.
+6. Produce polished sections as `.tex` by default; keep Markdown only as an
+   intermediate form when the user explicitly requested it.
    - Show a diff or change summary.
    - Mark any claims that were downgraded and why.
    - Flag any remaining issues that need author attention.
@@ -200,6 +203,8 @@ When the source text is in Chinese and needs translation to English:
 - Do not remove limitations or uncertainty statements.
 - Keep changes traceable — show what was changed and why.
 - If the underlying argument is broken, flag it rather than polishing over it.
+- Default output is LaTeX; do not generate Word/`.docx` documents unless the
+  user or contest profile explicitly requires it.
 
 # Verification
 

@@ -131,6 +131,8 @@ When writing paper sections later:
 - Every numerical claim must come from a result file.
 - Every figure or table reference must correspond to an existing or explicitly planned artifact.
 - Every conclusion must map back to a subquestion.
+- Default paper output is LaTeX (`paper/sections/*.tex` compiled by
+  `main.tex`); do not default to Word documents.
 
 First task:
 
