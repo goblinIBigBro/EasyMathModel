@@ -3,18 +3,26 @@
 % 通用中文数学建模论文模板（EasyMathModel 内置默认模板）
 % ----------------------------------------------------------------------
 % 适用场景：赛制没有提供官方论文模板时，作为 paper/main.tex 的默认骨架。
+% 本骨架按《全国大学生数学建模竞赛论文格式规范（2025年修订稿）》对齐：
+%   1. A4 纸，四边页边距至少 2.5 cm；
+%   2. 电子版第一页为“摘要专用页”：标题 + 中文摘要 + 关键词，
+%      无英文摘要、无目录、无作者/学校/赛区信息；
+%      摘要（含标题和关键词）不得超过一页；
+%   3. 页码从摘要页起，页脚中部，阿拉伯数字从 1 开始连续编号；
+%   4. 正文从下一页开始，尽量控制在 20 页以内；
+%   5. 正文之后是参考文献和附录（附录页数不限），全程匿名。
 % 使用方法：
 %   1. 把 templates/paper/ 复制为工作区 paper/；
 %   2. 把各问正文写入 paper/sections/q1.tex、q2.tex ...；
 %   3. 在 refs.bib 中填写真实参考文献（禁止编造）；
-%   4. 填写中英文摘要、关键词、标题；
+%   4. 填写标题、摘要、关键词；
 %   5. 编译：xelatex main && bibtex main && xelatex main && xelatex main。
 % 重要：如果赛制提供了官方模板（.tex/.docx 模板或排版要求），
 % 必须优先使用官方模板；本文件只是没有官方模板时的默认骨架。
 % ======================================================================
 \documentclass[12pt,a4paper,fontset=fandol]{ctexart}
 
-\usepackage[a4paper,top=2.54cm,bottom=2.54cm,left=3.17cm,right=3.17cm]{geometry}
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
 \graphicspath{{figures/}}
@@ -25,6 +33,21 @@
 \usepackage{xcolor}
 \usepackage{enumerate}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% 章节编号对齐常见中文数模版式（与 Word 版一致）：
+% 一级章节“一、二、…”，二级小节“2.1、2.2、…”
+\ctexset{
+  section = {
+    format = \raggedright\Large\bfseries,
+    number = \chinese{section},
+    aftername = 、
+  },
+  subsection = {
+    format = \raggedright\large\bfseries,
+    number = \arabic{section}.\arabic{subsection},
+    aftername = ~
+  }
+}
 
 \lstset{
   basicstyle=\ttfamily\footnotesize,
@@ -38,14 +61,17 @@
 \setlength{\parindent}{2em}
 \linespread{1.2}
 
+% 页码从摘要页起、页脚中部、阿拉伯数字（plain 样式即页脚居中页码）
+\pagestyle{plain}
+\pagenumbering{arabic}
+
 \begin{document}
 
-% ---------- 标题（按赛制要求匿名时，不写作者信息） ----------
+% ---------- 摘要专用页（第一页）：标题 + 摘要 + 关键词，不得超过一页 ----------
 \begin{center}
   {\LARGE\bfseries 论文标题（按赛题重写）}
 \end{center}
 
-% ---------- 中文摘要 ----------
 \begin{abstract}
   （中文摘要正文：每个子问题独立成段，先写结论后写方法；
   摘要中每个数字必须在正文中原样出现。）
@@ -54,28 +80,26 @@
   \noindent\textbf{关键词：}关键词一；关键词二；关键词三
 \end{abstract}
 
-% ---------- 英文摘要 ----------
-\begin{center}
-  {\Large\bfseries Abstract}
-\end{center}
-English abstract goes here. Summarize the main method and the headline
-results in one paragraph per subquestion.
+% 若赛制明确要求英文摘要（如统计建模大赛），取消下面注释；CUMCM 2025 无需英文：
+% \begin{center}
+%   {\Large\bfseries Abstract}
+% \end{center}
+% English abstract goes here.
 
-\newpage
-\tableofcontents
-\newpage
+\clearpage
 
-% ---------- 正文骨架（由 paper-section-writer 填充） ----------
+% ---------- 正文（尽量控制在 20 页以内；全程匿名） ----------
 \section{问题重述}
 \input{sections/restatement}
 
 \section{问题分析}
 \input{sections/analysis}
 
-\section{模型假设}
+\section{模型假设与符号说明}
+\subsection{模型假设}
 \input{sections/assumptions}
 
-\section{符号说明}
+\subsection{符号说明}
 % 符号表使用 longtable，保证跨页可断；所有符号与 planning/symbol_table.md 一致。
 \input{sections/symbols}
 
@@ -97,14 +121,16 @@ results in one paragraph per subquestion.
 \section{模型评价与推广}
 \input{sections/evaluation}
 
-% ---------- 参考文献（BibTeX，真实检索获取） ----------
+% ---------- 参考文献（\bibliography 自带无编号“参考文献”标题） ----------
+\clearpage
+% 真实检索获取；正文引用处必须标注。
 \bibliographystyle{unsrt}
 \bibliography{refs}
 
-% ---------- 附录：代码不进正文 ----------
-\appendix
-\section{附录：主要程序代码}
-% 代码放在附录，用 listings 排版；禁止在正文中出现代码块。
+% ---------- 附录（无编号标题，另起一页；文件列表 + 完整可运行源码） ----------
+\clearpage
+\section*{附录：支撑材料文件列表与主要程序代码}
+% 若确实没有用到程序，必须在此明确写“本论文没有用到程序”。
 \input{sections/appendix}
 
 \end{document}
