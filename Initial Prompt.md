@@ -133,6 +133,8 @@ When writing paper sections later:
 - Every conclusion must map back to a subquestion.
 - Default paper output is LaTeX (`paper/sections/*.tex` compiled by
   `main.tex`); do not default to Word documents.
+- No official contest template → use the bundled `templates/paper/` LaTeX
+  skeleton; do not wait for a template or fall back to Markdown.
 
 First task:
 

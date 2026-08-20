@@ -85,6 +85,9 @@ reconciling figure products.
   `paper/sections/*.tex` + `paper/refs.bib`); `.docx`/Word is not a default
   deliverable and appears only when the contest profile explicitly requires
   it. Markdown is an intermediate format only.
+- When no official contest template exists, `paper/main.tex` may be created
+  from the bundled `templates/paper/` skeleton; this satisfies the
+  LaTeX-default requirement.
 - Time-varying contest rules are verified against the current official source; do not assume last year's rules.
 
 # Rules

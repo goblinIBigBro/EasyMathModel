@@ -132,6 +132,7 @@ project/
 - 每个图表引用都必须对应已有或明确规划的 artifact。
 - 每个结论都必须回扣原始子问题。
 - 默认用 LaTeX 输出（`paper/sections/*.tex`，由 `main.tex` 编译）；不要默认生成 Word 文档。
+- 没有官方模板时，使用内置 `templates/paper/` LaTeX 骨架；不要停下来等模板，也不要退回 Markdown。
 
 第一个任务：
 

@@ -10,6 +10,9 @@ description: Draft submission-ready mathematical-modeling paper sections from th
 - Final result analysis exists.
 - Solution package and current frozen numbers exist.
 - Required human claim-scope and physical/domain-meaning decisions are recorded.
+- Paper template is resolved: use the contest official template when provided;
+  otherwise use the bundled `templates/paper/` LaTeX skeleton. Do not wait for
+  a template.
 
 If any prerequisite is missing, return to its producer rather than drafting around the gap.
 
@@ -27,7 +30,11 @@ Do not hunt through raw experiment folders to invent a narrative.
 
 # Workflow
 
-1. Resolve the requested section and contest format.
+1. Resolve the requested section, contest format, and template:
+   - official template provided → use it and follow its commands/class;
+   - no official template → copy `templates/paper/` into the workspace
+     `paper/` as the LaTeX skeleton and proceed;
+   - never wait for a template or fall back to Markdown as the final output.
 2. Build a claim map:
    - claim ID;
    - frozen value/source;
@@ -69,6 +76,8 @@ Transcribe these from the decision ledger with provenance. If absent, invoke a c
 - Default paper output is LaTeX (`.tex` sections compiled by `main.tex`);
   `.docx`/Word is produced only when the contest profile explicitly requires
   it.
+- Without an official contest template, use the bundled `templates/paper/`
+  LaTeX skeleton; do not block the writer waiting for a template.
 
 # Verification
 
@@ -78,3 +87,5 @@ Transcribe these from the decision ledger with provenance. If absent, invoke a c
 - Physical meaning and contribution are human-owned.
 - Limitations and uncertainty are visible.
 - No Type 1 figure appears.
+- `paper/main.tex` exists (official or bundled `templates/paper/` skeleton)
+  and every drafted section is saved as `.tex`.

@@ -1,0 +1,110 @@
+% !TEX program = xelatex
+% ======================================================================
+% 通用中文数学建模论文模板（EasyMathModel 内置默认模板）
+% ----------------------------------------------------------------------
+% 适用场景：赛制没有提供官方论文模板时，作为 paper/main.tex 的默认骨架。
+% 使用方法：
+%   1. 把 templates/paper/ 复制为工作区 paper/；
+%   2. 把各问正文写入 paper/sections/q1.tex、q2.tex ...；
+%   3. 在 refs.bib 中填写真实参考文献（禁止编造）；
+%   4. 填写中英文摘要、关键词、标题；
+%   5. 编译：xelatex main && bibtex main && xelatex main && xelatex main。
+% 重要：如果赛制提供了官方模板（.tex/.docx 模板或排版要求），
+% 必须优先使用官方模板；本文件只是没有官方模板时的默认骨架。
+% ======================================================================
+\documentclass[12pt,a4paper,fontset=fandol]{ctexart}
+
+\usepackage[a4paper,top=2.54cm,bottom=2.54cm,left=3.17cm,right=3.17cm]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{booktabs,multirow,longtable,array}
+\usepackage{float}
+\usepackage{caption,subcaption}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumerate}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false
+}
+
+\setlength{\parindent}{2em}
+\linespread{1.2}
+
+\begin{document}
+
+% ---------- 标题（按赛制要求匿名时，不写作者信息） ----------
+\begin{center}
+  {\LARGE\bfseries 论文标题（按赛题重写）}
+\end{center}
+
+% ---------- 中文摘要 ----------
+\begin{abstract}
+  （中文摘要正文：每个子问题独立成段，先写结论后写方法；
+  摘要中每个数字必须在正文中原样出现。）
+  \vspace{2mm}
+
+  \noindent\textbf{关键词：}关键词一；关键词二；关键词三
+\end{abstract}
+
+% ---------- 英文摘要 ----------
+\begin{center}
+  {\Large\bfseries Abstract}
+\end{center}
+English abstract goes here. Summarize the main method and the headline
+results in one paragraph per subquestion.
+
+\newpage
+\tableofcontents
+\newpage
+
+% ---------- 正文骨架（由 paper-section-writer 填充） ----------
+\section{问题重述}
+\input{sections/restatement}
+
+\section{问题分析}
+\input{sections/analysis}
+
+\section{模型假设}
+\input{sections/assumptions}
+
+\section{符号说明}
+% 符号表使用 longtable，保证跨页可断；所有符号与 planning/symbol_table.md 一致。
+\input{sections/symbols}
+
+\section{模型的建立与求解}
+\subsection{问题一}
+\input{sections/q1}
+\subsection{问题二}
+\input{sections/q2}
+\subsection{问题三}
+\input{sections/q3}
+\subsection{问题四}
+\input{sections/q4}
+\subsection{问题五}
+\input{sections/q5}
+
+\section{灵敏度与稳健性分析}
+\input{sections/robustness}
+
+\section{模型评价与推广}
+\input{sections/evaluation}
+
+% ---------- 参考文献（BibTeX，真实检索获取） ----------
+\bibliographystyle{unsrt}
+\bibliography{refs}
+
+% ---------- 附录：代码不进正文 ----------
+\appendix
+\section{附录：主要程序代码}
+% 代码放在附录，用 listings 排版；禁止在正文中出现代码块。
+\input{sections/appendix}
+
+\end{document}

@@ -170,6 +170,9 @@
   `paper/refs.bib`，编译为 PDF。
 - Markdown 只是中间草稿格式，交接给论文手前必须转成 `.tex`。
 - 默认不产出 Word/`.docx`；只有赛制明确要求时才允许生成。
+- 赛制提供官方模板时必须使用官方模板；没有官方模板时，用内置
+  `templates/paper/` 骨架创建 `paper/main.tex` 并继续。不得停下来等模板，
+  也不得把 Markdown 当作最终交付物。
 
 ### 结构
 

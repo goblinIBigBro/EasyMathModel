@@ -184,6 +184,10 @@ Type 3/4 figures additionally pass `figure-vision-review` before G5:
   `.tex` before writer handoff.
 - Word/`.docx` is not a default deliverable; produce it only when the contest
   profile explicitly requires it.
+- When the contest provides an official template, use it; otherwise create
+  `paper/main.tex` from the bundled `templates/paper/` skeleton and proceed.
+  Never block the writer waiting for a template, and never fall back to
+  Markdown as the final deliverable.
 
 ### Structure
 
